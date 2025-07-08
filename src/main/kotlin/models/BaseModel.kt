@@ -1,7 +1,7 @@
 package com.ricky.models
 
-import kotlinx.serialization.Serializable
 import kotlinx.datetime.LocalDateTime
+import kotlinx.serialization.Serializable
 
 @Serializable
 abstract class BaseModel(
