@@ -1,5 +1,9 @@
 package com.ricky
 
+import com.ricky.plugins.configureRouting
+import com.ricky.plugins.configureSerialization
+import com.ricky.plugins.configureStatusPages
+import com.ricky.plugins.configureValidation
 import io.ktor.server.application.*
 
 fun main(args: Array<String>) {
@@ -7,8 +11,8 @@ fun main(args: Array<String>) {
 }
 
 fun Application.module() {
-    configureFrameworks()
     configureSerialization()
-    configureDatabases()
+    configureStatusPages()
+    configureValidation()
     configureRouting()
 }
