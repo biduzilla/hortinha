@@ -8,30 +8,32 @@ import com.ricky.models.Usuario
 import com.ricky.repository.UsuarioRepository
 import com.ricky.utils.getLastPage
 import com.ricky.utils.getOffset
+import org.jetbrains.exposed.sql.SortOrder
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.deleteWhere
 import java.util.*
 
 class IUsuarioRepository : UsuarioRepository {
-    override suspend fun getAll(pageSize: Int, page: Int, sort: String?): Page<Usuario> {
-      return suspendTransaction {
-          val offset = getOffset(page, pageSize)
-          val query = UsuarioDAO.all()
-              .limit(pageSize)
-              .offset(offset)
-          val totalRecords = UsuarioDAO.count()
-          val lastPage = getLastPage(totalRecords, pageSize)
-          val content = query.map { it.toUsuario() }
+    override suspend fun getAll(pageSize: Int, page: Int): Page<Usuario> {
+        return suspendTransaction {
+            val offset = getOffset(page, pageSize)
+            val query = UsuarioDAO.all()
+                .orderBy(UsuarioTable.createdAt to SortOrder.DESC)
+                .limit(pageSize)
+                .offset(offset)
+            val totalRecords = UsuarioDAO.count()
+            val lastPage = getLastPage(totalRecords, pageSize)
+            val content = query.map { it.toUsuario() }
 
-          Page(
-              currentPage = page,
-              pageSize = pageSize,
-              firstPage = 1,
-              lastPage = lastPage,
-              totalRecords = totalRecords.toInt(),
-              content = content
-          )
-      }
+            Page(
+                currentPage = page,
+                pageSize = pageSize,
+                firstPage = 1,
+                lastPage = lastPage,
+                totalRecords = totalRecords.toInt(),
+                content = content
+            )
+        }
     }
 
 

@@ -33,4 +33,6 @@ dependencies {
     testImplementation(libs.kotlin.test.junit)
     implementation("org.jetbrains.exposed:exposed-kotlin-datetime:0.61.0")
     implementation("org.jetbrains.exposed:exposed-dao:0.61.0")
+    implementation("io.ktor:ktor-server-status-pages:3.1.2")
+    implementation("io.ktor:ktor-server-request-validation:3.1.2")
 }

@@ -5,8 +5,8 @@ import com.ricky.models.Usuario
 import java.util.*
 
 interface UsuarioService {
-    fun getAll(): Page<Usuario>
-    fun getById(idUsuario: UUID): Usuario?
-    fun save(usuario: Usuario): Usuario
-    fun deleteById(idUsuario: UUID)
+    suspend fun getAll(pageSize: Int = 10, page: Int = 0): Page<Usuario>
+    suspend fun getById(idUsuario: UUID): Usuario?
+    suspend fun save(usuario: Usuario): Usuario
+    suspend fun deleteById(idUsuario: UUID)
 }
