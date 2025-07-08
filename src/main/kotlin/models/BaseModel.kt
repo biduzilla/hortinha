@@ -9,5 +9,5 @@ abstract class BaseModel(
     var createdBy: String? = null,
     var updatedAt: LocalDateTime? = null,
     var updatedBy: String? = null,
-    var flagExcluido: Boolean = false
+    var deleted: Boolean = false
 )
