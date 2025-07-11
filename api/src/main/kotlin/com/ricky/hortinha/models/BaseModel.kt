@@ -31,5 +31,5 @@ abstract class BaseModel(
     var updatedBy: String? = null,
 
     @Column(name = "FLAGEXCLUIDO")
-    var flagExcluido: Boolean = false
+    var flagExcluido: Boolean = false,
 ) : Serializable

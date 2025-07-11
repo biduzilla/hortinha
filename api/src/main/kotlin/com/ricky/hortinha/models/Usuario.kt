@@ -1,8 +1,14 @@
 package com.ricky.hortinha.models
 
 import jakarta.persistence.*
+import org.hibernate.annotations.SQLDelete
+import org.hibernate.annotations.SQLRestriction
+import org.springframework.security.core.GrantedAuthority
+import org.springframework.security.core.userdetails.UserDetails
 
 @Entity(name = "USUARIO")
+@SQLDelete(sql = "UPDATE Usuario SET flagExcluido = true WHERE idUsuario=?")
+@SQLRestriction("flagExcluido <> true")
 data class Usuario(
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -18,18 +24,15 @@ data class Usuario(
     @Column(name = "EMAIL", length = 50)
     var email: String = "",
 
-    @Column(name = "TELEFONE", length = 10)
-    var telefone: Long = 0L,
+    @Column(name = "CODVERIFICACAO")
+    var codVerificacao: Int = 0,
+) : BaseModel(), UserDetails {
+    override fun getAuthorities(): MutableCollection<out GrantedAuthority> {
+        return mutableListOf()
+    }
 
-    @Column(name="CODVERIFICACAO")
-var codVerificacao: Int = 0,
+    override fun getPassword(): String = senha
 
-    @ManyToMany(fetch = FetchType.EAGER)
-@JoinTable(
-    name = "USUARIO_ROLE",
-    joinColumns = [JoinColumn(name = "USER_ID")],
-    inverseJoinColumns = [JoinColumn(name = "ROLE_ID")]
-)
-var roles: List<Role> = mutableListOf()
+    override fun getUsername(): String = email
 
-) : BaseModel()
+}

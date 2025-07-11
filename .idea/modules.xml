@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/hortinha.iml" filepath="$PROJECT_DIR$/.idea/hortinha.iml" />
+      <module fileurl="file://$PROJECT_DIR$/api/hortinha.iml" filepath="$PROJECT_DIR$/api/hortinha.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/spring.iml" filepath="$PROJECT_DIR$/.idea/spring.iml" />
     </modules>
   </component>
 </project>

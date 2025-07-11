@@ -1,9 +1,14 @@
 package com.ricky.hortinha.security
 
+import io.jsonwebtoken.Claims
 import org.springframework.security.core.userdetails.UserDetails
 
 interface JwtService {
-    fun extractUserName(token: String): String
+    fun extractUsername(token: String): String
+    fun <T> extractClaim(token: String, claimsResolver: (Claims) -> T): T
     fun generateToken(userDetails: UserDetails): String
-    fun isTokenValid(token: String): Boolean
+    fun generateToken(extraClaims: Map<String, Any>, userDetails: UserDetails): String
+    fun getExpirationTime(): Long
+
+    fun isTokenValid(token:String, userDetails: UserDetails):Boolean
 }
