@@ -3,7 +3,6 @@ package com.ricky.hortinha.service
 import com.ricky.hortinha.dto.LoginDTO
 import com.ricky.hortinha.dto.TokenDTO
 import com.ricky.hortinha.models.Usuario
-import org.springframework.security.core.userdetails.UserDetailsService
 
 interface UsuarioService {
     fun login(login: LoginDTO): TokenDTO
