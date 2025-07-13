@@ -13,7 +13,7 @@ data class Usuario(
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "USER_ID")
-    var id: String = "",
+    var idUsuario: String = "",
 
     @Column(name = "NOME", length = 50)
     var nome: String = "",
