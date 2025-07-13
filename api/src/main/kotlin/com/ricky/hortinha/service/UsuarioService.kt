@@ -5,11 +5,11 @@ import com.ricky.hortinha.dto.TokenDTO
 import com.ricky.hortinha.models.Usuario
 import org.springframework.security.core.userdetails.UserDetailsService
 
-interface UsuarioService:UserDetailsService {
+interface UsuarioService {
     fun login(login: LoginDTO): TokenDTO
     fun findById(idUser: String): Usuario
     fun update(usuario: Usuario): Usuario
-    fun save(usuario: Usuario, verificar: Boolean): Usuario
+    fun save(usuario: Usuario): Usuario
     fun delete(usuario: Usuario)
     fun deleteById(idUsuario: String)
     fun findByEmail(email: String): Usuario
