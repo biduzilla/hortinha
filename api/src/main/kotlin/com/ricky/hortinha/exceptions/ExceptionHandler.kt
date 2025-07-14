@@ -1,7 +1,6 @@
-package com.ricky.hortinha.controller
+package com.ricky.hortinha.exceptions
 
 import com.ricky.hortinha.dto.ErrorView
-import com.ricky.hortinha.exceptions.GenericException
 import jakarta.servlet.http.HttpServletRequest
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
