@@ -1,5 +1,6 @@
 package com.ricky.hortinha.models
 
+import com.ricky.hortinha.dto.UsuarioDTO
 import jakarta.persistence.*
 import org.hibernate.annotations.SQLDelete
 import org.hibernate.annotations.SQLRestriction
@@ -27,6 +28,14 @@ data class Usuario(
     @Column(name = "CODVERIFICACAO")
     var codVerificacao: Int = 0,
 ) : BaseModel(), UserDetails {
+    fun toDTO(): UsuarioDTO {
+        return UsuarioDTO(
+            idUsuario = idUsuario,
+            nome = nome,
+            email = email
+        )
+    }
+
     override fun getAuthorities(): MutableCollection<out GrantedAuthority> {
         return mutableListOf()
     }

@@ -18,5 +18,5 @@ interface UsuarioService {
     fun verificarCod(cod: Int, email: String)
     fun refreshToken(tokenDTO: TokenDTO): TokenDTO
     fun findUsuariosBySenderId(userId: String): List<Usuario>
-
+    fun enviarEmailSenha(email: String)
 }
