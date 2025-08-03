@@ -11,7 +11,7 @@ data class Usuario(
     var codVerificacao: Int = 0,
 ) : BaseModel() {
     fun toDTO(): UsuarioDTO = UsuarioDTO(
-        idUsuario = idUsuario,
+        idUsuario = idUsuario.toString(),
         nome = nome,
         email = email
     )

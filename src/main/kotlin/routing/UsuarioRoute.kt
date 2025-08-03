@@ -1,6 +1,6 @@
 package com.ricky.routing
 
-import com.ricky.dto.UsuarioDTO
+import com.ricky.dto.UsuarioSaveDTO
 import com.ricky.service.UsuarioService
 import com.ricky.utils.getIdUUID
 import com.ricky.utils.getValidatedPage
@@ -12,6 +12,7 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 
 fun Route.usuarioRoutes(usuarioService: UsuarioService) {
+
     route("/usuario") {
         get {
             val pageSize = call.getValidatedPageSize()
@@ -26,7 +27,7 @@ fun Route.usuarioRoutes(usuarioService: UsuarioService) {
             call.respond(user.toDTO())
         }
         post {
-            val user = call.receive<UsuarioDTO>()
+            val user = call.receive<UsuarioSaveDTO>()
             val userSave = usuarioService.save(user.toModel())
             call.respond(HttpStatusCode.Created, userSave)
         }

@@ -8,12 +8,22 @@ import com.ricky.models.Usuario
 import com.ricky.repository.UsuarioRepository
 import com.ricky.utils.getLastPage
 import com.ricky.utils.getOffset
+import io.ktor.server.application.*
 import org.jetbrains.exposed.sql.SortOrder
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.deleteWhere
+import org.koin.core.module.dsl.singleOf
+import org.koin.dsl.bind
+import org.koin.ktor.plugin.koinModule
 import java.util.*
 
-class IUsuarioRepository : UsuarioRepository {
+class UsuarioRepositoryImpl : UsuarioRepository {
+    fun Application.usuarioDataModule() {
+        koinModule {
+            singleOf(::UsuarioRepositoryImpl) bind UsuarioRepository::class
+        }
+    }
+
     override suspend fun getAll(pageSize: Int, page: Int): Page<Usuario> {
         return suspendTransaction {
             val offset = getOffset(page, pageSize)

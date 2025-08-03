@@ -5,14 +5,13 @@ import kotlinx.serialization.Serializable
 import java.util.*
 
 @Serializable
-data class UsuarioDTO(
-    val idUsuario: String,
+data class UsuarioSaveDTO(
     var nome: String = "",
     var email: String = "",
     var senha: String = ""
 ) {
     fun toModel(): Usuario = Usuario(
-        idUsuario = UUID.fromString(idUsuario),
+        idUsuario = UUID.randomUUID(),
         nome = nome,
         email = email
     )

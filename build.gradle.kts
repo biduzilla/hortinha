@@ -17,6 +17,8 @@ repositories {
 }
 
 dependencies {
+    implementation(libs.koin.ktor)
+    implementation(libs.koin.logger.slf4j)
     implementation(libs.ktor.server.di)
     implementation(libs.ktor.server.core)
     implementation(libs.ktor.serialization.kotlinx.json)
@@ -35,4 +37,5 @@ dependencies {
     implementation("org.jetbrains.exposed:exposed-dao:0.61.0")
     implementation("io.ktor:ktor-server-status-pages:3.1.2")
     implementation("io.ktor:ktor-server-request-validation:3.1.2")
+    implementation("io.ktor:ktor-server-di:3.2.1")
 }
