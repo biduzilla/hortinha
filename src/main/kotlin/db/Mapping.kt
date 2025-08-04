@@ -15,7 +15,7 @@ import java.util.*
 
 abstract class BaseTable(name: String, columnName: String = "ID") : UUIDTable(name, columnName) {
     val createdAt = datetime("CREATED_AT").defaultExpression(CurrentDateTime)
-    val createdBy = varchar("CREATED_BY", 200).nullable()
+    val createdBy = varchar("CREATED_BY", 200).default("anonymous")
     val updatedAt = datetime("UPDATED_AT").nullable()
     val updatedBy = varchar("UPDATED_BY", 200).nullable()
     val deleted = bool("DELETED").default(false)
@@ -32,12 +32,12 @@ abstract class BaseDAO<T : BaseModel>(
     private var updatedBy by table.updatedBy
     private var deleted by table.deleted
 
-    protected fun applyAuditFields(model: T) {
+    fun applyAuditFields(model: T) {
         model.apply {
             createdAt = this@BaseDAO.createdAt
             createdBy = this@BaseDAO.createdBy
-            updatedAt = this@BaseDAO.updatedAt
-            updatedBy = this@BaseDAO.updatedBy
+            updatedAt = this@BaseDAO.updatedAt?.takeIf { this@BaseDAO.updatedAt != null }
+            updatedBy = this@BaseDAO.updatedBy?.takeIf { this@BaseDAO.updatedBy != null }
             deleted = this@BaseDAO.deleted
         }
     }

@@ -9,6 +9,7 @@ import com.ricky.repository.UsuarioRepository
 import com.ricky.utils.getLastPage
 import com.ricky.utils.getOffset
 import io.ktor.server.application.*
+import org.jetbrains.exposed.dao.flushCache
 import org.jetbrains.exposed.sql.SortOrder
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.deleteWhere
@@ -59,12 +60,13 @@ class UsuarioRepositoryImpl : UsuarioRepository {
 
     override suspend fun save(usuario: Usuario): Usuario {
         return suspendTransaction {
-            UsuarioDAO.new {
+            val userSave = UsuarioDAO.new {
                 nome = usuario.nome
                 email = usuario.email
                 senha = usuario.senha
-                codVerificacao = usuario.codVerificacao
-            }.toUsuario()
+            }
+            flushCache()
+            userSave.toUsuario()
         }
     }
 
@@ -73,7 +75,9 @@ class UsuarioRepositoryImpl : UsuarioRepository {
             val rowDeleted = UsuarioTable.deleteWhere {
                 UsuarioTable.id eq idUsuario
             }
+            flushCache()
             rowDeleted == 1
+
         }
     }
 }

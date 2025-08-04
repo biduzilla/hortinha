@@ -29,7 +29,7 @@ fun Route.usuarioRoutes(usuarioService: UsuarioService) {
         post {
             val user = call.receive<UsuarioSaveDTO>()
             val userSave = usuarioService.save(user.toModel())
-            call.respond(HttpStatusCode.Created, userSave)
+            call.respond(HttpStatusCode.Created, userSave.toDTO())
         }
         delete("/{id}") {
             val id = call.getIdUUID()
