@@ -8,5 +8,6 @@ interface UsuarioRepository {
     suspend fun getAll(pageSize: Int = 10, page: Int = 0): Page<Usuario>
     suspend fun getById(idUsuario: UUID): Usuario?
     suspend fun save(usuario: Usuario): Usuario
+    suspend fun update(usuario: Usuario): Usuario?
     suspend fun deleteById(idUsuario: UUID)
 }

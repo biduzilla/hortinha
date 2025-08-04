@@ -1,5 +1,8 @@
 package com.ricky.models
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class Page<T>(
     var currentPage: Int = 0,
     var pageSize: Int = 10,

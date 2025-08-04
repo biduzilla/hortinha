@@ -38,6 +38,17 @@ class UsuarioServiceImpl(private val usuarioRepository: UsuarioRepository) : Usu
         return usuarioRepository.save(usuario)
     }
 
+    override suspend fun update(usuario: Usuario): Usuario {
+        val user = getById(usuario.idUsuario)
+        user.nome = usuario.nome
+        user.email = usuario.email
+        return usuarioRepository.update(usuario) ?: throw GenericServerError(
+            statusCode = HttpStatusCode.NotFound.value,
+            errorMessage = "Usuário com ID ${usuario.idUsuario} não encontrado",
+            httpStatus = HttpStatusCode.NotFound.description
+        )
+    }
+
     override suspend fun deleteById(idUsuario: UUID) {
         usuarioRepository.deleteById(idUsuario)
     }

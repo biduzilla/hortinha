@@ -59,6 +59,7 @@ class UsuarioRepositoryImpl : UsuarioRepository {
     }
 
     override suspend fun save(usuario: Usuario): Usuario {
+
         return suspendTransaction {
             val userSave = UsuarioDAO.new {
                 nome = usuario.nome
@@ -67,6 +68,20 @@ class UsuarioRepositoryImpl : UsuarioRepository {
             }
             flushCache()
             userSave.toUsuario()
+        }
+    }
+
+    override suspend fun update(usuario: Usuario): Usuario? {
+        return suspendTransaction {
+            val userUpdated = UsuarioDAO.findByIdAndUpdate(usuario.idUsuario) { dao ->
+                dao.nome = usuario.nome
+                dao.email = usuario.email
+                dao.senha = usuario.senha
+                dao.codVerificacao = usuario.codVerificacao
+            }
+
+            flushCache()
+            userUpdated?.toUsuario()
         }
     }
 

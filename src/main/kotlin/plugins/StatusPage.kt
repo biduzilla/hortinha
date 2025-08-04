@@ -25,10 +25,11 @@ fun Application.configureStatusPages() {
                 }
 
                 else -> {
-                    call.respond(
-                        HttpStatusCode.InternalServerError,
-                        mapOf("message" to "Erro interno no servidor")
-                    )
+                    call.respond(HttpStatusCode.InternalServerError, GenericServerError(
+                        statusCode = HttpStatusCode.InternalServerError.value,
+                        errorMessage = cause.message.toString(),
+                        httpStatus = HttpStatusCode.InternalServerError.description
+                    ))
                     throw cause
                 }
             }

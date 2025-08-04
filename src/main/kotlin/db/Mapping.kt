@@ -63,7 +63,8 @@ class UsuarioDAO(id: EntityID<UUID>) : BaseDAO<Usuario>(id, UsuarioTable) {
         idUsuario = id.value,
         nome = nome,
         email = email,
-        senha = senha
+        senha = senha,
+        codVerificacao = codVerificacao ?: 0
     ).also { applyAuditFields(it) }
 }
 

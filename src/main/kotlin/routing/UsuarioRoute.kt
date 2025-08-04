@@ -1,5 +1,6 @@
 package com.ricky.routing
 
+import com.ricky.dto.UsuarioDTO
 import com.ricky.dto.UsuarioSaveDTO
 import com.ricky.service.UsuarioService
 import com.ricky.utils.getIdUUID
@@ -25,6 +26,11 @@ fun Route.usuarioRoutes(usuarioService: UsuarioService) {
             val id = call.getIdUUID()
             val user = usuarioService.getById(id)
             call.respond(user.toDTO())
+        }
+        put {
+            val user = call.receive<UsuarioDTO>()
+            val userSave = usuarioService.update(user.toModel())
+            call.respond(HttpStatusCode.OK, userSave.toDTO())
         }
         post {
             val user = call.receive<UsuarioSaveDTO>()
