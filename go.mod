@@ -6,6 +6,7 @@ require (
 	github.com/go-mail/mail/v2 v2.3.0
 	github.com/jackc/pgx/v5 v5.7.5
 	github.com/joeshaw/envdecode v0.0.0-20200121155833-099f1fc765bd
+	github.com/lib/pq v1.10.9
 	github.com/pressly/goose/v3 v3.24.3
 	golang.org/x/crypto v0.40.0
 )
